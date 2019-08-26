@@ -42,13 +42,20 @@
       </el-form>
     </el-card>
     <!-- 筛选结果 -->
+    <el-card>
+      <div slot="header">根据筛选条件共查询到 0 条结果：</div>
+      <!-- 表格 -->
+      <el-table :data="articles">
+        <el-table-column prop="title" label="标题"></el-table-column>
+      </el-table>
+      <!-- 分页 -->
+      <el-pagination class="pager" background layout="prev, pager, next, total" :total="1000"></el-pagination>
+    </el-card>
   </div>
 </template>
 
 <script>
-import MyBread from '@/components/my-bread'
 export default {
-  components: { MyBread },
   data () {
     return {
       // 提交后台参数  值为null的时候  字段是不会发送给后台的。
@@ -61,10 +68,20 @@ export default {
       // 日期数据  0索引 起始时间 1索引  结束时间
       dateArr: [],
       // 频道选项数据
-      channelOptions: [{ id: 100, name: 'java' }]
+      channelOptions: [{ id: 100, name: 'java' }],
+      // 文章列表数据
+      articles: [{ title: '文章标题xxxxx' }, { title: '文章标题xxxxx' }]
     }
   }
 }
 </script>
 
-<style scoped lang='less'></style>
+<style scoped lang='less'>
+.el-card {
+  margin-bottom: 20px;
+}
+.pager{
+  text-align: center;
+  margin-top: 20px;
+}
+</style>
