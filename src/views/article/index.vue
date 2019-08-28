@@ -72,7 +72,7 @@
         <el-table-column prop="pubdate" label="发布时间"></el-table-column>
         <el-table-column label="操作" width="120px">
           <template slot-scope="scope">
-            <el-button type="primary" icon="el-icon-edit" circle plain></el-button>
+            <el-button @click="$router.push('/publish?id='+scope.row.id)" type="primary" icon="el-icon-edit" circle plain></el-button>
             <el-button
               type="danger"
               @click="delArticle(scope.row.id)"
@@ -127,6 +127,23 @@ export default {
     this.getArticles()
   },
   methods: {
+    // 删除文章
+    delArticle (id) {
+      this.$confirm('亲，此操作将永久删除该文章, 是否继续?', '温馨提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        // 点击确认触发的函数
+        // get 获取数据 post 添加数据 put 完整修改数据 delete 删除数据 patch 局部修改数据
+        await this.$http.delete(`articles/${id}`)
+        // 代表成功
+        this.$message.success('删除成功')
+        this.getArticles()
+      }).catch(() => {
+        // 点击取消触发的函数
+      })
+    },
     // 搜索
     search () {
       // 当你重新查询的时候，当前页码应该第一页。

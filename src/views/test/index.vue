@@ -1,27 +1,28 @@
 <template>
   <div class='container'>
-    <com-a>
-      <!-- slot="content" 指定插入的插槽名称 -->
-      <!-- slot-scope 获取组件内容给插槽传递的数据  scope是收集了当前插槽上所有绑定的数据  -->
-      <!-- <div slot="content" slot-scope="scope">con1 {{scope.abc}}</div> -->
-      <!-- 新写法使用 v-slot 指令  v-slot:插槽名称="作用域数据对象" -->
-      <template v-slot:content="scope">con1 {{scope.abc}}</template>
-      <div slot="footer">foot1</div>
-    </com-a>
-    <hr>
-    <com-a>
-      <div slot="content">con2</div>
-      <div slot="footer">foot2</div>
-    </com-a>
-    <hr>
-    <com-a></com-a>
+    {{parentMsg}}
+    <com-b @abc="fn"></com-b>
   </div>
 </template>
 
 <script>
-import ComA from '@/components/com-a'
+import ComB from '@/components/com-b'
 export default {
-  components: { ComA }
+  data () {
+    return {
+      parentMsg: ''
+    }
+  },
+  methods: {
+    // @abc 事件属于 com-b 的自定义事件
+    // 遵循：事件给谁绑定，谁负责触发
+    // fn 父组件申明  函数是可以传参
+    fn (data) {
+      // 事件对应函数
+      this.parentMsg = data
+    }
+  },
+  components: { ComB }
   // async created () {
   //   console.log('ok')
   //   // 使用 promise 方式

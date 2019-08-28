@@ -2,6 +2,18 @@
 import axios from 'axios'
 import store from '@/store'
 import router from '@/router'
+import JSONBIG from 'json-bigint'
+// 默认配置  转换响应数据
+axios.defaults.transformResponse = [data => {
+  // 对data（后台的原始数据）进行转换
+  // 但是 有一些接口  没有任何响应内容
+  // JSONBIG.parse(null)  报错
+  try {
+    return JSONBIG.parse(data)
+  } catch (e) {
+    return data
+  }
+}]
 // 默认配置  基准地址
 axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0'
 // 默认配置  请求头携带token
