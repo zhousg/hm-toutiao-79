@@ -15,7 +15,9 @@ axios.defaults.transformResponse = [data => {
   }
 }]
 // 默认配置  基准地址
-axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0'
+axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0/'
+// mock 地址 http://yapi.demo.qunar.com/mock/77102/hmtt/
+
 // 默认配置  请求头携带token
 // axios.defaults.headers.Authorization = 'Bearer ' + store.getUser().token
 // Vue.prototype.$http = axios

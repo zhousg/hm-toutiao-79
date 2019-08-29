@@ -18,14 +18,8 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="频道：">
-          <el-select v-model="reqParams.channel_id" placeholder="请选择" clearable>
-            <el-option
-              v-for="item in channelOptions"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id"
-            ></el-option>
-          </el-select>
+          <!-- 封装的组件 :value  @input="reqParams.channel_id=接受数据" -->
+          <my-channel v-model="reqParams.channel_id"></my-channel>
         </el-form-item>
         <el-form-item label="日期：">
           <el-date-picker
@@ -104,7 +98,7 @@ export default {
       // 提交后台参数  值为null的时候  字段是不会发送给后台的。
       reqParams: {
         status: null,
-        channel_id: null,
+        channel_id: 1,
         begin_pubdate: null,
         end_pubdate: null,
         page: 1,
@@ -112,8 +106,6 @@ export default {
       },
       // 日期数据  0索引 起始时间 1索引  结束时间
       dateArr: [],
-      // 频道选项数据
-      channelOptions: [],
       // 文章列表数据
       articles: [],
       // 总条数
@@ -121,8 +113,6 @@ export default {
     }
   },
   created () {
-    // 获取频道选项数据
-    this.getChannelOptions()
     // 获取文章列表数据
     this.getArticles()
   },
@@ -149,9 +139,9 @@ export default {
       // 当你重新查询的时候，当前页码应该第一页。
       this.reqParams.page = 1
       // 数据需要处理 频道数据值为 “” 的时候
-      if (this.reqParams.channel_id === '') {
-        this.reqParams.channel_id = null
-      }
+      // if (this.reqParams.channel_id === '') {
+      //   this.reqParams.channel_id = null
+      // }
       this.getArticles()
     },
     // 选择时间
@@ -171,12 +161,6 @@ export default {
       // 把提交后台的参数改成新的页码
       this.reqParams.page = newPage
       this.getArticles()
-    },
-    async getChannelOptions () {
-      const {
-        data: { data }
-      } = await this.$http.get('channels')
-      this.channelOptions = data.channels
     },
     async getArticles () {
       // post 请求 post(‘地址’，‘数据’)
