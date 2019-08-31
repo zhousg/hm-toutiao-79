@@ -29,10 +29,10 @@ export default {
       this.$emit('input', channelId)
     },
     async getChannelOptions () {
-      // const {
-      //   data: { data }
-      // } = await this.$http.get('channels')
-      const data = { channels: [{ id: 1, name: 'java' }, { id: 2, name: '前端' }] }
+      const {
+        data: { data }
+      } = await this.$http.get('channels')
+      // const data = { channels: [{ id: 1, name: 'java' }, { id: 2, name: '前端' }] }
       this.channelOptions = data.channels
     }
   }

@@ -98,7 +98,7 @@ export default {
       // 提交后台参数  值为null的时候  字段是不会发送给后台的。
       reqParams: {
         status: null,
-        channel_id: 1,
+        channel_id: null,
         begin_pubdate: null,
         end_pubdate: null,
         page: 1,
