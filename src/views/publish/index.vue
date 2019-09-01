@@ -84,6 +84,22 @@ export default {
       articleId: null
     }
   },
+  watch: {
+    // 监听地址栏ID传参变化
+    '$route.query.id': function (newVal, oldVal) {
+      // 修改切到发布的时候  重置文章数据 清空文章ID
+      this.articleForm = {
+        title: '',
+        content: '',
+        cover: {
+          type: 1,
+          images: []
+        },
+        channel_id: null
+      }
+      this.articleId = null
+    }
+  },
   created () {
     this.articleId = this.$route.query.id
     // 如果是编辑
