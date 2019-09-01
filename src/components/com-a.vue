@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import eventBus from './evnetBus'
+import eventBus from './eventBus'
 export default {
   data () {
     return {

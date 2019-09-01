@@ -74,6 +74,7 @@
 </template>
 
 <script>
+import eventBus from '@/components/eventBus'
 import store from '@/store'
 export default {
   data () {
@@ -87,6 +88,13 @@ export default {
     const user = store.getUser()
     this.name = user.name
     this.photo = user.photo
+    // 绑定事件 接受名字数据
+    eventBus.$on('updateName', (name) => {
+      this.name = name
+    })
+    eventBus.$on('updatePhoto', (photo) => {
+      this.photo = photo
+    })
   },
   methods: {
     // el-dropdown-item 绑定事件  不支持click
