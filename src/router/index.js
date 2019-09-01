@@ -11,6 +11,7 @@ import Article from '@/views/article'
 import Image from '@/views/image'
 import Publish from '@/views/publish'
 import Comment from '@/views/comment'
+import Setting from '@/views/setting'
 
 import store from '@/store'
 
@@ -31,7 +32,8 @@ const router = new VueRouter({
         { path: '/article', name: 'article', component: Article },
         { path: '/image', name: 'image', component: Image },
         { path: '/publish', name: 'publish', component: Publish },
-        { path: '/comment', name: 'comment', component: Comment }
+        { path: '/comment', name: 'comment', component: Comment },
+        { path: '/setting', name: 'setting', component: Setting }
       ]
     },
     { path: '/test', name: 'test', component: Test },
